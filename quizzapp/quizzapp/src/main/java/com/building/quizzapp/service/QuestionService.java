@@ -16,11 +16,10 @@ public class QuestionService {
 
     public List<Question> getAllQuestions() {
         return questionDao.findAll();
-        // throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public List<Question> getQuestionsByCategory(String category) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return questionDao.findByCategory(category);
     }
     
 
