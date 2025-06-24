@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.building.quizzapp.Question;
 import com.building.quizzapp.dao.QuestionDao;
+import com.building.quizzapp.model.Question;
 
 @Service
 public class QuestionService {
@@ -26,7 +26,6 @@ public class QuestionService {
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
         try{
         return new ResponseEntity<>(questionDao.findByCategory(category),HttpStatus.OK);
