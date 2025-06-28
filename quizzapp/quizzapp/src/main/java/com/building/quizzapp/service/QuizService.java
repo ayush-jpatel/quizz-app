@@ -14,6 +14,7 @@ import com.building.quizzapp.dao.QuizDao;
 import com.building.quizzapp.model.Question;
 import com.building.quizzapp.model.QuestionWrapper;
 import com.building.quizzapp.model.Quiz;
+import com.building.quizzapp.model.Response;
 
 @Service
 public class QuizService {
@@ -46,5 +47,19 @@ public class QuizService {
             questionsToUser.add(questionWrapper);
         }
         return new ResponseEntity<>(questionsToUser, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> submitQuiz(Integer id, List<Response> responses) {
+        Optional<Quiz> quiz = quizDao.findById(id);
+        List<Question> questionsFromDB = quiz.get().getQuestions();
+        int score = 0;
+        int i = 0;
+        for(Response response:responses){
+            if(response.getResponse().equals(questionsFromDB.get(i).getRightAnswer()))
+                score++;
+            i++;
+        }
+
+        return new ResponseEntity<>(score, HttpStatus.OK);
     }
 }
